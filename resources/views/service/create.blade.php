@@ -8,7 +8,6 @@
 
 @section('content')
 
-{{-- ================= STYLE ================= --}}
 <style>
     .card-modern {
         border: none;
@@ -31,7 +30,6 @@
         border-color: #6366f1;
     }
 
-    /* BUTTON */
     .btn-modern {
         border-radius: 10px;
         padding: 6px 16px;
@@ -63,47 +61,40 @@
     }
 </style>
 
-{{-- ================= CARD ================= --}}
 <div class="card card-modern">
 
-    {{-- HEADER --}}
     <div class="card-header bg-white" style="border-bottom:1px solid #eee;">
         <h5 class="mb-0 font-weight-bold">🧺 Form Tambah Service</h5>
     </div>
 
-    {{-- BODY --}}
     <div class="card-body">
 
         <form action="{{ route('service.store') }}" method="POST">
             @csrf
 
-            {{-- NAMA LAYANAN --}}
             <div class="form-group">
                 <label>Nama Layanan</label>
-                <input type="text" name="nama_layanan"
+                <input type="text" name="name" {{-- ✅ diperbaiki --}}
                     class="form-control"
                     required>
             </div>
 
-            {{-- HARGA --}}
             <div class="form-group">
                 <label>Harga</label>
-                <input type="number" name="harga"
+                <input type="number" name="price" {{-- ✅ diperbaiki --}}
                     class="form-control"
                     required>
             </div>
 
-            {{-- SATUAN --}}
             <div class="form-group">
                 <label>Satuan</label>
-                <select name="satuan" class="form-control" required>
+                <select name="unit" class="form-control" required> {{-- ✅ diperbaiki --}}
                     <option value="">-- Pilih Satuan --</option>
                     <option value="kg">Kg</option>
                     <option value="pasang">Pasang</option>
                 </select>
             </div>
 
-            {{-- BUTTON --}}
             <div class="d-flex justify-content-between mt-4">
 
                 <a href="{{ route('service.index') }}" class="btn btn-modern btn-back">

@@ -32,8 +32,8 @@ class RegisteredUserController extends Controller
             'name'     => ['required', 'string', 'max:255'],
             'email'    => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'no_hp'    => ['required', 'string', 'max:20'],
-            'alamat'   => ['required', 'string', 'max:255'],
+            'phone'    => ['required', 'string', 'max:20'],
+            'address'  => ['required', 'string', 'max:255'],
         ]);
 
         $user = User::create([
@@ -44,10 +44,10 @@ class RegisteredUserController extends Controller
         ]);
 
         Customer::create([
-            'user_id'       => $user->id,
-            'nama_customer' => $user->name,
-            'no_hp'         => $request->no_hp,
-            'alamat'        => $request->alamat,
+            'user_id' => $user->id,
+            'name'    => $user->name,
+            'phone'   => $request->phone,
+            'address' => $request->address,
         ]);
 
         event(new Registered($user));

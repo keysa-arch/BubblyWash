@@ -72,11 +72,11 @@
                         <td>{{ $index + 1 }}</td>
 
                         <td class="text-left font-weight-semibold">
-                            {{ $t->customer->nama_customer }}
+                            {{ $t->customer->name }}  {{-- ✅ diperbaiki --}}
                         </td>
 
                         <td class="text-left">
-                            {{ $t->service->nama_layanan }}
+                            {{ $t->service->name }}   {{-- ✅ diperbaiki --}}
                         </td>
 
                         <td class="text-money">

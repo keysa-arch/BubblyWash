@@ -36,7 +36,6 @@
         resize: none;
     }
 
-    /* BUTTON */
     .btn-modern {
         border-radius: 10px;
         padding: 6px 16px;
@@ -80,42 +79,42 @@
     <div class="card-body">
 
         <form action="{{ route('customer.store') }}" method="POST">
-            @csrf 
+            @csrf
 
             {{-- NAMA --}}
             <div class="form-group">
-                <label for="nama_customer">Nama Customer</label>
-                <input type="text" name="nama_customer" 
-                    class="form-control @error('nama_customer') is-invalid @enderror" 
-                    id="nama_customer"
-                    value="{{ old('nama_customer') }}" required>
+                <label for="name">Nama Customer</label>
+                <input type="text" name="name"
+                    class="form-control @error('name') is-invalid @enderror"
+                    id="name"
+                    value="{{ old('name') }}" required>
 
-                @error('nama_customer')
+                @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
             {{-- NO HP --}}
             <div class="form-group">
-                <label for="no_hp">No HP</label>
-                <input type="text" name="no_hp" 
-                    class="form-control @error('no_hp') is-invalid @enderror" 
-                    id="no_hp"
-                    value="{{ old('no_hp') }}" required>
+                <label for="phone">No HP</label>
+                <input type="text" name="phone"
+                    class="form-control @error('phone') is-invalid @enderror"
+                    id="phone"
+                    value="{{ old('phone') }}" required>
 
-                @error('no_hp')
+                @error('phone')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
             {{-- ALAMAT --}}
             <div class="form-group">
-                <label for="alamat">Alamat</label>
-                <textarea name="alamat"
-                    class="form-control @error('alamat') is-invalid @enderror"
-                    id="alamat" required>{{ old('alamat') }}</textarea>
+                <label for="address">Alamat</label>
+                <textarea name="address"
+                    class="form-control @error('address') is-invalid @enderror"
+                    id="address" required>{{ old('address') }}</textarea>
 
-                @error('alamat')
+                @error('address')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>

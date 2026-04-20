@@ -8,15 +8,16 @@ use App\Models\Service;
 
 class Transaksi extends Model
 {
+    protected $table = 'transaksi'; 
+
     protected $fillable = [
         'customer_id',
         'service_id',
         'qty',
-        'harga',
+        'price',
         'total',
-        'diskon',
-        'status',
-        'tanggal'
+        'discount',
+        'status'
     ];
 
     // Relasi ke tabel customer

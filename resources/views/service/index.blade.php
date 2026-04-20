@@ -8,7 +8,6 @@
 
 @section('content')
 
-{{-- ================= STYLE ================= --}}
 <style>
     .card-modern {
         border: none;
@@ -80,10 +79,8 @@
     }
 </style>
 
-{{-- ================= CARD ================= --}}
 <div class="card card-modern">
 
-    {{-- HEADER --}}
     <div class="card-header bg-white d-flex justify-content-between align-items-center"
          style="border-bottom:1px solid #eee;">
 
@@ -95,7 +92,6 @@
 
     </div>
 
-    {{-- SEARCH --}}
     <div class="card-body pb-2">
 
         <form method="GET" action="{{ route('service.index') }}">
@@ -114,7 +110,6 @@
             </div>
         </form>
 
-        {{-- ALERT --}}
         @if(session('success'))
             <div class="alert alert-success mt-3 shadow-sm rounded">
                 {{ session('success') }}
@@ -123,7 +118,6 @@
 
     </div>
 
-    {{-- TABLE --}}
     <div class="card-body table-responsive p-0">
 
         <table class="table table-hover table-modern text-nowrap">
@@ -145,26 +139,24 @@
                         <td>{{ $services->firstItem() + $key }}</td>
 
                         <td class="text-left font-weight-semibold">
-                            {{ $service->nama_layanan }}
+                            {{ $service->name }} {{-- ✅ diperbaiki --}}
                         </td>
 
                         <td class="price-text">
-                            Rp {{ number_format($service->harga) }}
+                            Rp {{ number_format($service->price) }} {{-- ✅ diperbaiki --}}
                         </td>
 
                         <td>
-                            {{ $service->satuan }}
+                            {{ $service->unit }} {{-- ✅ diperbaiki --}}
                         </td>
 
                         <td>
 
-                            {{-- EDIT --}}
                             <a href="{{ route('service.edit', $service->id) }}"
                                class="btn btn-modern btn-edit btn-sm">
                                 ✏️
                             </a>
 
-                            {{-- DELETE --}}
                             <form action="{{ route('service.destroy', $service->id) }}"
                                   method="POST"
                                   class="d-inline"
@@ -193,7 +185,6 @@
 
     </div>
 
-    {{-- PAGINATION --}}
     <div class="card-footer bg-white d-flex justify-content-end">
         {{ $services->links() }}
     </div>

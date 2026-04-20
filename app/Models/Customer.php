@@ -11,9 +11,9 @@ class Customer extends Model
 
     protected $fillable = [
         'user_id',          
-        'nama_customer',
-        'no_hp',
-        'alamat'
+        'name',
+        'phone',
+        'address'
     ];
 
     /*

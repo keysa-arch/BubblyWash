@@ -7,9 +7,9 @@
 @section('css')
 <style>
   .notif-item { border-left: 3px solid transparent; }
-  .notif-item.proses  { border-color: #BA7517; background: #FAEEDA; }
-  .notif-item.selesai { border-color: #639922; background: #EAF3DE; }
-  .notif-item.diambil { border-color: #534AB7; background: #EEEDFE; }
+  .notif-item.process   { border-color: #BA7517; background: #FAEEDA; }
+  .notif-item.done      { border-color: #639922; background: #EAF3DE; }
+  .notif-item.picked_up { border-color: #534AB7; background: #EEEDFE; }
 </style>
 @stop
 
@@ -93,7 +93,7 @@
         <div class="notif-item {{ $notif->status }} rounded-2 p-2 mb-2">
           <div class="d-flex justify-content-between align-items-start">
             <div style="font-size:12px;font-weight:500">
-              {{ optional($notif->service)->nama_layanan ?? 'Transaksi' }}
+              {{ optional($notif->service)->name ?? 'Transaksi' }}
             </div>
             <small style="font-size:10px;color:inherit;opacity:.7">
               {{ optional($notif->created_at)->diffForHumans() }}
@@ -101,8 +101,8 @@
           </div>
           <div style="font-size:11px;opacity:.75;margin-top:2px">
             Rp {{ number_format($notif->total, 0, ',', '.') }} &middot;
-            @if($notif->status == 'proses')  Sedang diproses
-            @elseif($notif->status == 'selesai') Selesai
+            @if($notif->status == 'process')   Sedang diproses
+            @elseif($notif->status == 'done')  Selesai
             @else Sudah diambil
             @endif
           </div>

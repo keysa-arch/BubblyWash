@@ -11,10 +11,10 @@ class CustomerController extends Controller
     {
         $customers = Customer::query()
             ->when($request->search, function ($query, $search) {
-                $query->where('nama_customer', 'like', "%{$search}%")
-                      ->orWhere('no_hp', 'like', "%{$search}%");
+                $query->where('name', 'like', "%{$search}%")
+                      ->orWhere('phone', 'like', "%{$search}%");
             })
-            ->latest() // biar data terbaru di atas (opsional)
+            ->latest()
             ->paginate(10);
 
         return view('customer.index', compact('customers'));
@@ -28,9 +28,9 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama_customer' => 'required|string|max:255',
-            'no_hp'         => 'required|string|max:15|unique:customers,no_hp',
-            'alamat'        => 'required|string',
+            'name'    => 'required|string|max:255',
+            'phone'   => 'required|string|max:15|unique:customers,phone',
+            'address' => 'required|string',
         ]);
 
         Customer::create($data);
@@ -52,9 +52,9 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $data = $request->validate([
-            'nama_customer' => 'required|string|max:255',
-            'no_hp'         => 'required|string|max:15|unique:customers,no_hp,' . $customer->id,
-            'alamat'        => 'required|string',
+            'name'    => 'required|string|max:255',
+            'phone'   => 'required|string|max:15|unique:customers,phone,' . $customer->id,
+            'address' => 'required|string',
         ]);
 
         $customer->update($data);

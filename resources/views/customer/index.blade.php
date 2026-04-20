@@ -150,13 +150,13 @@
                         <td>{{ $customers->firstItem() + $key }}</td>
 
                         <td class="text-left font-weight-semibold">
-                            {{ $customer->nama_customer }}
+                            {{ $customer->name }}
                         </td>
 
-                        <td>{{ $customer->no_hp }}</td>
+                        <td>{{ $customer->phone }}</td>
 
                         <td class="text-left text-muted">
-                            {{ $customer->alamat }}
+                            {{ $customer->address }}
                         </td>
 
                         <td>

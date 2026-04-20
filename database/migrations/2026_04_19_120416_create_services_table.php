@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('services', function (Blueprint $table) {
-    $table->id();
-    $table->string('nama_layanan');
-    $table->integer('harga');
-    $table->string('satuan');
-    $table->timestamps();
-    });
+        Schema::create('services', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');     
+            $table->integer('price');   
+            $table->string('unit');     
+            $table->timestamps();
+        });
     }
 
     /**

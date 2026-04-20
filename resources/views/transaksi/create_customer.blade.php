@@ -74,7 +74,6 @@
             </div>
         @endif
 
-        {{-- ✅ route customer --}}
         <form action="{{ route('customer.transaksi.store') }}" method="POST">
             @csrf
 
@@ -88,14 +87,13 @@
                     <option value="">-- Pilih Service --</option>
                     @foreach($services as $service)
                         <option value="{{ $service->id }}"
-                                data-harga="{{ $service->harga }}">
-                            {{ $service->nama_layanan }} (Rp {{ number_format($service->harga) }}/kg)
+                                data-harga="{{ $service->price }}"> {{-- ✅ diperbaiki --}}
+                            {{ $service->name }} (Rp {{ number_format($service->price) }}/kg) {{-- ✅ diperbaiki --}}
                         </option>
                     @endforeach
                 </select>
             </div>
 
-            {{-- ✅ name="qty" sesuai controller --}}
             <div class="form-group">
                 <label>Berat (Kg)</label>
                 <input type="number" name="qty" id="berat"
@@ -111,7 +109,6 @@
             </div>
 
             <div class="text-right mt-4">
-                {{-- ✅ type="submit" --}}
                 <button type="submit" class="btn btn-modern btn-save">
                     🧺 Pesan Laundry
                 </button>

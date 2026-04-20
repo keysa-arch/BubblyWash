@@ -8,7 +8,6 @@
 
 @section('content')
 
-{{-- ================= STYLE ================= --}}
 <style>
     .card-modern {
         border: none;
@@ -74,9 +73,9 @@
         font-size: 14px;
     }
 
-    .status-proses { background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 8px; font-size: 12px; }
-    .status-selesai { background: #dcfce7; color: #166534; padding: 4px 8px; border-radius: 8px; font-size: 12px; }
-    .status-diambil { background: #e0f2fe; color: #0369a1; padding: 4px 8px; border-radius: 8px; font-size: 12px; }
+    .status-process  { background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 8px; font-size: 12px; }
+    .status-done     { background: #dcfce7; color: #166534; padding: 4px 8px; border-radius: 8px; font-size: 12px; }
+    .status-picked_up { background: #e0f2fe; color: #0369a1; padding: 4px 8px; border-radius: 8px; font-size: 12px; }
 
     .money {
         font-weight: 500;
@@ -84,10 +83,8 @@
     }
 </style>
 
-{{-- ================= CARD ================= --}}
 <div class="card card-modern">
 
-    {{-- HEADER --}}
     <div class="card-header bg-white d-flex justify-content-between align-items-center"
          style="border-bottom:1px solid #eee;">
 
@@ -99,7 +96,6 @@
 
     </div>
 
-    {{-- SEARCH + ALERT --}}
     <div class="card-body pb-2">
 
         <form method="GET" action="{{ route('transaksi.index') }}">
@@ -126,7 +122,6 @@
 
     </div>
 
-    {{-- TABLE --}}
     <div class="card-body table-responsive p-0">
 
         <table class="table table-hover table-modern text-nowrap">
@@ -150,11 +145,11 @@
                         <td>{{ $transaksis->firstItem() + $key }}</td>
 
                         <td class="text-left font-weight-semibold">
-                            {{ $t->customer->nama_customer }}
+                            {{ $t->customer->name }} {{-- ✅ diperbaiki --}}
                         </td>
 
                         <td class="text-left">
-                            {{ $t->service->nama_layanan }}
+                            {{ $t->service->name }} {{-- ✅ diperbaiki --}}
                         </td>
 
                         <td>{{ $t->qty }}</td>
@@ -163,18 +158,16 @@
                             Rp {{ number_format($t->total) }}
                         </td>
 
-                        {{-- STATUS --}}
                         <td>
-                            @if($t->status == 'proses')
-                                <span class="status-proses">Proses</span>
-                            @elseif($t->status == 'selesai')
-                                <span class="status-selesai">Selesai</span>
+                            @if($t->status == 'process') {{-- ✅ diperbaiki --}}
+                                <span class="status-process">Proses</span>
+                            @elseif($t->status == 'done') {{-- ✅ diperbaiki --}}
+                                <span class="status-done">Selesai</span>
                             @else
-                                <span class="status-diambil">Diambil</span>
+                                <span class="status-picked_up">Diambil</span>
                             @endif
                         </td>
 
-                        {{-- AKSI --}}
                         <td>
 
                             <a href="{{ route('transaksi.edit', $t->id) }}"
@@ -212,7 +205,6 @@
 
     </div>
 
-    {{-- PAGINATION --}}
     <div class="card-footer bg-white d-flex justify-content-end">
         {{ $transaksis->links() }}
     </div>

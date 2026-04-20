@@ -8,7 +8,6 @@
 
 @section('content')
 
-{{-- ================= STYLE ================= --}}
 <style>
     .card-modern {
         border: none;
@@ -70,10 +69,8 @@
     }
 </style>
 
-{{-- ================= CARD ================= --}}
 <div class="card card-modern">
 
-    {{-- HEADER --}}
     <div class="card-header bg-white d-flex justify-content-between align-items-center"
          style="border-bottom:1px solid #eee;">
 
@@ -84,7 +81,6 @@
         </a>
     </div>
 
-    {{-- TABLE --}}
     <div class="card-body table-responsive p-0">
 
         <table class="table table-hover table-modern text-nowrap">
@@ -104,18 +100,16 @@
                         <td>{{ $members->firstItem() + $key }}</td>
 
                         <td class="font-weight-semibold text-left">
-                            {{ $member->customer->nama_customer }}
+                            {{ $member->customer->name }} {{-- ✅ diperbaiki --}}
                         </td>
 
                         <td>
 
-                            {{-- EDIT --}}
                             <a href="{{ route('member.edit', $member->id) }}"
                                class="btn btn-modern btn-edit btn-sm">
                                 ✏️ Edit
                             </a>
 
-                            {{-- DELETE --}}
                             <form action="{{ route('member.destroy', $member->id) }}"
                                   method="POST"
                                   class="d-inline"
@@ -144,7 +138,6 @@
 
     </div>
 
-    {{-- FOOTER --}}
     <div class="card-footer bg-white d-flex justify-content-end">
         {{ $members->links() }}
     </div>

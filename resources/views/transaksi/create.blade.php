@@ -102,7 +102,7 @@
                     <option value="">-- Customer Baru --</option>
                     @foreach($customers as $c)
                         <option value="{{ $c->id }}" {{ old('customer_id') == $c->id ? 'selected' : '' }}>
-                            {{ $c->nama_customer }}
+                            {{ $c->name }} {{-- ✅ diperbaiki --}}
                         </option>
                     @endforeach
                 </select>
@@ -112,19 +112,19 @@
             <div class="box-summary mb-3" id="form_customer_baru">
                 <label class="font-weight-bold">➕ Tambah Customer Baru</label>
 
-                <input type="text" name="nama_customer"
+                <input type="text" name="name" {{-- ✅ diperbaiki --}}
                        class="form-control mb-2"
                        placeholder="Nama Customer"
-                       value="{{ old('nama_customer') }}">
+                       value="{{ old('name') }}">
 
-                <input type="text" name="no_hp"
+                <input type="text" name="phone" {{-- ✅ diperbaiki --}}
                        class="form-control mb-2"
                        placeholder="No HP"
-                       value="{{ old('no_hp') }}">
+                       value="{{ old('phone') }}">
 
-                <textarea name="alamat"
+                <textarea name="address" {{-- ✅ diperbaiki --}}
                           class="form-control mb-2"
-                          placeholder="Alamat">{{ old('alamat') }}</textarea>
+                          placeholder="Alamat">{{ old('address') }}</textarea>
 
                 <div class="form-check mt-2">
                     <input type="checkbox"
@@ -147,9 +147,9 @@
                         <select name="service_id" id="service" class="form-control" required>
                             <option value="">-- Pilih Service --</option>
                             @foreach($services as $s)
-                                <option value="{{ $s->id }}" data-harga="{{ $s->harga }}"
+                                <option value="{{ $s->id }}" data-harga="{{ $s->price }}" {{-- ✅ diperbaiki --}}
                                     {{ old('service_id') == $s->id ? 'selected' : '' }}>
-                                    {{ $s->nama_layanan }} (Rp {{ number_format($s->harga) }})
+                                    {{ $s->name }} (Rp {{ number_format($s->price) }}) {{-- ✅ diperbaiki --}}
                                 </option>
                             @endforeach
                         </select>
@@ -225,7 +225,6 @@
     const diskon = document.getElementById('diskon');
     const member = document.getElementById('member');
 
-    // Toggle form customer baru
     function toggleCustomerBaru() {
         if (customerSelect.value === '') {
             formCustomerBaru.style.display = 'block';
@@ -234,11 +233,9 @@
         }
     }
 
-    // Jalankan saat pertama load
     toggleCustomerBaru();
     customerSelect.addEventListener('change', toggleCustomerBaru);
 
-    // Hitung total
     function formatRp(n) {
         return "Rp " + (n || 0).toLocaleString('id-ID');
     }

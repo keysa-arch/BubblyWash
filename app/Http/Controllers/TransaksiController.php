@@ -83,15 +83,15 @@ class TransaksiController extends Controller
             } else {
 
                 $request->validate([
-                    'nama_customer' => 'required|string|max:255',
-                    'no_hp'         => 'required|string|max:20',
-                    'alamat'        => 'required|string',
+                    'name'    => 'required|string|max:255',
+                    'phone'   => 'required|string|max:20',
+                    'address' => 'required|string',
                 ]);
 
                 $customer = Customer::create([
-                    'nama_customer' => $request->nama_customer,
-                    'no_hp'         => $request->no_hp,
-                    'alamat'        => $request->alamat,
+                    'name'    => $request->name,
+                    'phone'   => $request->phone,
+                    'address' => $request->address,
                 ]);
 
                 // Jadikan member jika dicentang
@@ -111,13 +111,13 @@ class TransaksiController extends Controller
         // =====================
         // HITUNG TOTAL
         // =====================
-        $subtotal = $service->harga * $request->qty;
+        $subtotal = $service->price * $request->qty;
 
         $isMember = Member::where('customer_id', $customer->id)->exists();
 
-        $diskon = $isMember ? $subtotal * 0.1 : 0;
+        $discount = $isMember ? $subtotal * 0.1 : 0;
 
-        $total = $subtotal - $diskon;
+        $total = $subtotal - $discount;
 
         // =====================
         // SIMPAN TRANSAKSI
@@ -126,10 +126,10 @@ class TransaksiController extends Controller
             'customer_id' => $customer->id,
             'service_id'  => $service->id,
             'qty'         => $request->qty,
-            'harga'       => $service->harga,
-            'diskon'      => $diskon,
+            'price'       => $service->price,
+            'discount'    => $discount,
             'total'       => $total,
-            'status'      => 'proses',
+            'status'      => 'process',
         ]);
 
         // =====================
@@ -177,25 +177,25 @@ class TransaksiController extends Controller
             'customer_id' => 'required|exists:customers,id',
             'service_id'  => 'required|exists:services,id',
             'qty'         => 'required|numeric|min:1',
-            'status'      => 'required|in:proses,selesai,diambil',
+            'status'      => 'required|in:process,done,picked_up',
         ]);
 
         $service = Service::findOrFail($request->service_id);
 
-        $subtotal = $service->harga * $request->qty;
+        $subtotal = $service->price * $request->qty;
 
         $isMember = Member::where('customer_id', $request->customer_id)->exists();
 
-        $diskon = $isMember ? $subtotal * 0.1 : 0;
+        $discount = $isMember ? $subtotal * 0.1 : 0;
 
-        $total = $subtotal - $diskon;
+        $total = $subtotal - $discount;
 
         $transaksi->update([
             'customer_id' => $request->customer_id,
             'service_id'  => $service->id,
             'qty'         => $request->qty,
-            'harga'       => $service->harga,
-            'diskon'      => $diskon,
+            'price'       => $service->price,
+            'discount'    => $discount,
             'total'       => $total,
             'status'      => $request->status,
         ]);

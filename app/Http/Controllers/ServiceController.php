@@ -11,7 +11,7 @@ class ServiceController extends Controller
     {
         $services = Service::query()
             ->when($request->search, function ($query, $search) {
-                $query->where('nama_layanan', 'like', "%{$search}%");
+                $query->where('name', 'like', "%{$search}%");
             })
             ->latest()
             ->paginate(10);
@@ -27,9 +27,9 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama_layanan' => 'required|string|max:255',
-            'harga'        => 'required|integer',
-            'satuan'       => 'required|string|max:50',
+            'name'  => 'required|string|max:255',
+            'price' => 'required|integer',
+            'unit'  => 'required|string|max:50',
         ]);
 
         Service::create($data);
@@ -46,9 +46,9 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $data = $request->validate([
-            'nama_layanan' => 'required|string|max:255',
-            'harga'        => 'required|integer',
-            'satuan'       => 'required|string|max:50',
+            'name'  => 'required|string|max:255',
+            'price' => 'required|integer',
+            'unit'  => 'required|string|max:50',
         ]);
 
         $service->update($data);

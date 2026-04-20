@@ -8,7 +8,6 @@
 
 @section('content')
 
-{{-- ================= STYLE ================= --}}
 <style>
     .card-modern {
         border: none;
@@ -31,7 +30,6 @@
         border-color: #6366f1;
     }
 
-    /* BUTTON */
     .btn-modern {
         border-radius: 10px;
         padding: 6px 16px;
@@ -63,21 +61,17 @@
     }
 </style>
 
-{{-- ================= CARD ================= --}}
 <div class="card card-modern">
 
-    {{-- HEADER --}}
     <div class="card-header bg-white" style="border-bottom:1px solid #eee;">
         <h5 class="mb-0 font-weight-bold">⭐ Form Tambah Member</h5>
     </div>
 
-    {{-- BODY --}}
     <div class="card-body">
 
         <form action="{{ route('member.store') }}" method="POST">
             @csrf
 
-            {{-- PILIH CUSTOMER --}}
             <div class="form-group">
                 <label>Pilih Customer</label>
 
@@ -90,7 +84,7 @@
                     @foreach($customers as $c)
                         <option value="{{ $c->id }}"
                             {{ old('customer_id') == $c->id ? 'selected' : '' }}>
-                            {{ $c->nama_customer }}
+                            {{ $c->name }} {{-- ✅ diperbaiki --}}
                         </option>
                     @endforeach
 
@@ -101,7 +95,6 @@
                 @enderror
             </div>
 
-            {{-- BUTTON --}}
             <div class="d-flex justify-content-between mt-4">
 
                 <a href="{{ route('member.index') }}" class="btn btn-modern btn-back">

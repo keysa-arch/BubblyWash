@@ -35,9 +35,9 @@ class DashboardController extends Controller
         // DASHBOARD ADMIN
         // =====================
         $totalTransaksi  = Transaksi::count();
-        $totalProses     = Transaksi::where('status', 'proses')->count();
-        $totalSelesai    = Transaksi::where('status', 'selesai')->count();
-        $totalPendapatan = Transaksi::where('status', 'selesai')->sum('total');
+        $totalProses     = Transaksi::where('status', 'process')->count(); // diubah
+        $totalSelesai    = Transaksi::where('status', 'done')->count();    // diubah
+        $totalPendapatan = Transaksi::where('status', 'done')->sum('total'); // diubah
 
         return view('dashboard', compact(
             'totalTransaksi',

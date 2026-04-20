@@ -104,7 +104,7 @@
                     @foreach($customers as $c)
                         <option value="{{ $c->id }}"
                             {{ $transaksi->customer_id == $c->id ? 'selected' : '' }}>
-                            {{ $c->nama_customer }}
+                            {{ $c->name }} {{-- ✅ diperbaiki --}}
                         </option>
                     @endforeach
                 </select>
@@ -119,9 +119,9 @@
                             <option value="">-- Pilih Service --</option>
                             @foreach($services as $s)
                                 <option value="{{ $s->id }}"
-                                    data-harga="{{ $s->harga }}"
+                                    data-harga="{{ $s->price }}" {{-- ✅ diperbaiki --}}
                                     {{ $transaksi->service_id == $s->id ? 'selected' : '' }}>
-                                    {{ $s->nama_layanan }} (Rp {{ number_format($s->harga) }})
+                                    {{ $s->name }} (Rp {{ number_format($s->price) }}) {{-- ✅ diperbaiki --}}
                                 </option>
                             @endforeach
                         </select>
@@ -130,7 +130,6 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        {{-- ✅ name="qty" sesuai controller --}}
                         <label>Qty / Berat (Kg)</label>
                         <input type="number" name="qty" id="qty"
                                class="form-control"
@@ -144,9 +143,9 @@
             <div class="form-group mt-3">
                 <label>Status</label>
                 <select name="status" class="form-control" required>
-                    <option value="proses"   {{ $transaksi->status == 'proses'   ? 'selected' : '' }}>Proses</option>
-                    <option value="selesai"  {{ $transaksi->status == 'selesai'  ? 'selected' : '' }}>Selesai</option>
-                    <option value="diambil"  {{ $transaksi->status == 'diambil'  ? 'selected' : '' }}>Diambil</option>
+                    <option value="process"   {{ $transaksi->status == 'process'   ? 'selected' : '' }}>Proses</option> {{-- ✅ diperbaiki --}}
+                    <option value="done"      {{ $transaksi->status == 'done'      ? 'selected' : '' }}>Selesai</option> {{-- ✅ diperbaiki --}}
+                    <option value="picked_up" {{ $transaksi->status == 'picked_up' ? 'selected' : '' }}>Diambil</option> {{-- ✅ diperbaiki --}}
                 </select>
             </div>
 
@@ -158,13 +157,13 @@
                     <div class="col-md-4">
                         <label>Harga</label>
                         <input type="text" id="harga" class="form-control" readonly
-                               value="{{ $transaksi->harga }}">
+                               value="{{ $transaksi->price }}"> {{-- ✅ diperbaiki --}}
                     </div>
 
                     <div class="col-md-4">
                         <label>Diskon</label>
                         <input type="text" id="diskon" class="form-control" readonly
-                               value="{{ $transaksi->diskon ?? 0 }}">
+                               value="{{ $transaksi->discount ?? 0 }}"> {{-- ✅ diperbaiki --}}
                     </div>
 
                     <div class="col-md-4">
@@ -183,7 +182,6 @@
                     ← Batal
                 </a>
 
-                {{-- ✅ tambah type="submit" --}}
                 <button type="submit" class="btn btn-modern btn-save">
                     💾 Update Transaksi
                 </button>
@@ -208,7 +206,7 @@ let harga = document.getElementById('harga');
 let total = document.getElementById('total');
 let diskon = document.getElementById('diskon');
 
-let isMember = {{ $transaksi->diskon > 0 ? 'true' : 'false' }};
+let isMember = {{ $transaksi->discount > 0 ? 'true' : 'false' }}; {{-- ✅ diperbaiki --}}
 
 function formatRp(n) {
     return "Rp " + (n || 0).toLocaleString('id-ID');
